@@ -5,3 +5,4 @@
 
 <!-- Template Javascript -->
 <script src="template/js/main.js"></script>
+@yield('mainfooter')

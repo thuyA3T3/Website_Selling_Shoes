@@ -22,10 +22,14 @@ class ProductController extends Controller
             'categories' => $this->productService->getMenu()
         ]);
     }
-    public function detailproduct(Product $product)
+    public function show(Product $product)
     {
         return view('detailproduct', [
-            'products' => $product,
+            'product' => $product,
         ]);
+    }
+    public function test()
+    {
+        return view('main');
     }
 }

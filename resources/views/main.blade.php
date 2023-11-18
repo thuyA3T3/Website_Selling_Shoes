@@ -36,17 +36,15 @@
                     <div class="navbar-nav mr-auto">
                         <a href="/" class="nav-item nav-link active">Home</a>
                         <a href="{{route('product')}}" class="nav-item nav-link">Products</a>
-                        <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>
-                        <a href="cart.html" class="nav-item nav-link">Cart</a>
                         <a href="checkout.html" class="nav-item nav-link">Checkout</a>
-                        <a href="my-account.html" class="nav-item nav-link">My Account</a>
+                        <a href="{{route('viewaccount')}}" class="nav-item nav-link">My Account</a>
                     </div>
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
                             <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Login</a>
-                                <a href="#" class="dropdown-item">Register</a>
+                                <a href="{{route('viewloginregister')}}" class="dropdown-item">Login</a>
+                                <a href="{{route('viewloginregister')}}" class="dropdown-item">Register</a>
                             </div>
                         </div>
                     </div>
@@ -63,7 +61,7 @@
                 <div class="col-md-3">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="img/logo.png" alt="Logo">
+                            <img src="{{ asset('img/logo.png') }}" alt="Logo">
                         </a>
                     </div>
                 </div>
@@ -79,7 +77,7 @@
                             <i class="fa fa-heart"></i>
                             <span>(0)</span>
                         </a>
-                        <a href="cart.html" class="btn cart">
+                        <a href="{{route('viewcart')}}" class="btn cart">
                             <i class="fa fa-shopping-cart"></i>
                             <span>(0)</span>
                         </a>
