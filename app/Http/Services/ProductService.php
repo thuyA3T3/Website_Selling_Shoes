@@ -63,4 +63,9 @@ class ProductService
         }
         return false;
     }
+    public function getProduct($category)
+    {
+        $products = Product::where('CategoryID', $category->id)->get();
+        return $products;
+    }
 }

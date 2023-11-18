@@ -26,6 +26,8 @@ use App\Http\Controllers\LoginControlller;
 
 Route::get('/', [MainController::class, 'index']);
 Route::get('/product', [ProductController::class, 'index'])->name('product');
+Route::get('/category/{category}', [ProductController::class, 'showcategory']);
+
 Route::get('/product/{product}', [ProductController::class, 'show']);
 Route::get('/cart', [CartController::class, 'show'])->name('viewcart');
 Route::get('/login_register', [LoginControlller::class, 'show'])->name('viewloginregister');
