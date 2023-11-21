@@ -29,7 +29,8 @@ Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::get('/category/{category}', [ProductController::class, 'showcategory']);
 
 Route::get('/product/{product}', [ProductController::class, 'show']);
-Route::get('/cart', [CartController::class, 'show'])->name('viewcart');
+Route::get('/cart', [CartController::class, 'index'])->name('viewcart');
+Route::post('/add-cart', [CartController::class, 'add'])->name('addcart');
 Route::get('/login_register', [LoginControlller::class, 'show'])->name('viewloginregister');
 
 

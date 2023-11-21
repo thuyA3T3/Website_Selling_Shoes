@@ -32,25 +32,25 @@
             </div>
             <div class="col-md-6">
                 <div class="header-slider normal-slider">
-                    <div class="header-slider-item">
-                        <img src="img/slider-1.jpg" alt="Slider Image" />
+                    <div class="header-slider-item d-flex align-items-center">
+                        <img src="img/1_1.webp" alt="Slider Image" class="mx-auto" />
                         <div class="header-slider-caption">
-                            <p>Some text goes here that describes the image</p>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                            <p>{{$categories[0]->name}}</p>
+                            <a class="btn" href="/category/{{$categories[0]->id}}"><i class="fa fa-shopping-cart"></i>Shop Now</a>
                         </div>
                     </div>
-                    <div class="header-slider-item">
-                        <img src="img/slider-2.jpg" alt="Slider Image" />
+                    <div class="header-slider-item d-flex align-items-center">
+                        <img src="img/1_2.webp" alt="Slider Image" class="mx-auto" />
                         <div class="header-slider-caption">
-                            <p>Some text goes here that describes the image</p>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                            <p>{{$categories[1]->name}}</p>
+                            <a class="btn" href="/category/{{$categories[1]->id}}"><i class="fa fa-shopping-cart"></i>Shop Now</a>
                         </div>
                     </div>
-                    <div class="header-slider-item">
-                        <img src="img/slider-3.jpg" alt="Slider Image" />
+                    <div class="header-slider-item d-flex align-items-center">
+                        <img src="img/1_3.webp" alt="Slider Image" class="mx-auto" />
                         <div class="header-slider-caption">
-                            <p>Some text goes here that describes the image</p>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                            <p>{{$categories[2]->name}}</p>
+                            <a class="btn" href="/category/{{$categories[2]->id}}"><i class="fa fa-shopping-cart"></i>Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -58,15 +58,15 @@
             <div class="col-md-3">
                 <div class="header-img">
                     <div class="img-item">
-                        <img src="img/category-1.jpg" />
-                        <a class="img-text" href="">
-                            <p>Some text goes here that describes the image</p>
+                        <img src="img/1_2.webp" />
+                        <a class="img-text" href="/category/{{$categories[3]->id}}">
+                            <p>{{$categories[3]->name}}</p>
                         </a>
                     </div>
                     <div class="img-item">
-                        <img src="img/category-2.jpg" />
-                        <a class="img-text" href="">
-                            <p>Some text goes here that describes the image</p>
+                        <img src="img/1_5.webp" />
+                        <a class="img-text" href="/category/{{$categories[4]->id}}">
+                            <p>{{$categories[4]->name}}</p>
                         </a>
                     </div>
                 </div>
@@ -142,45 +142,45 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="category-item ch-400">
-                    <img src="img/category-3.jpg" />
-                    <a class="category-name" href="">
-                        <p>Some text goes here that describes the image</p>
+                    <img src="img/1_1.webp" />
+                    <a class="category-name" href="/category/{{$categories[0]->id}}">
+                        <p>{{$categories[0]->name}}</p>
                     </a>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="category-item ch-250">
-                    <img src="img/category-4.jpg" />
-                    <a class="category-name" href="">
-                        <p>Some text goes here that describes the image</p>
+                    <img src="img/1_2.webp" />
+                    <a class="category-name" href="/category/{{$categories[1]->id}}">
+                        <p>{{$categories[1]->name}}</p>
                     </a>
                 </div>
                 <div class="category-item ch-150">
-                    <img src="img/category-5.jpg" />
-                    <a class="category-name" href="">
-                        <p>Some text goes here that describes the image</p>
+                    <img src="img/1slider-1.jpg" />
+                    <a class="category-name" href="/category/{{$categories[2]->id}}">
+                        <p>{{$categories[2]->name}}</p>
                     </a>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="category-item ch-150">
-                    <img src="img/category-6.jpg" />
-                    <a class="category-name" href="">
-                        <p>Some text goes here that describes the image</p>
+                    <img src="img/2slider.jpg" />
+                    <a class="category-name" href="/category/{{$categories[3]->id}}">
+                        <p>{{$categories[3]->name}}</p>
                     </a>
                 </div>
                 <div class="category-item ch-250">
-                    <img src="img/category-7.jpg" />
-                    <a class="category-name" href="">
-                        <p>Some text goes here that describes the image</p>
+                    <img src="img/1_5.webp" />
+                    <a class="category-name" href="/category/{{$categories[4]->id}}">
+                        <p>{{$categories[4]->name}}</p>
                     </a>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="category-item ch-400">
-                    <img src="img/category-8.jpg" />
-                    <a class="category-name" href="">
-                        <p>Some text goes here that describes the image</p>
+                    <img src="img/1_3.webp" />
+                    <a class="category-name" href="{{route('product')}}">
+                        <p>All</p>
                     </a>
                 </div>
             </div>
@@ -215,7 +215,7 @@
             <div class="col-lg-3">
                 <div class="product-item">
                     <div class="product-title">
-                        <a href="#">{{$product->Name}}</a>
+                        <a href="/product/{{$product->id}}">{{$product->Name}}</a>
                         <div class="ratting">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -231,7 +231,7 @@
                         <div class="product-action">
                             <a href="#"><i class="fa fa-cart-plus"></i></a>
                             <a href="#"><i class="fa fa-heart"></i></a>
-                            <a href="#"><i class="fa fa-search"></i></a>
+                            <a href="/product/{{$product->id}}"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="product-price">
@@ -268,13 +268,16 @@
 <div class="recent-product product">
     <div class="container-fluid">
         <div class="section-header">
-            <h1>Recent Product</h1>
+            <h1>Discounted Product</h1>
         </div>
         <div class="row align-items-center product-slider product-slider-4">
+            @foreach($products as $key => $product)
+            @if($product->CategoryID == 7)
+
             <div class="col-lg-3">
                 <div class="product-item">
                     <div class="product-title">
-                        <a href="#">Product Name</a>
+                        <a href="/product/{{$product->id}}">{{$product->Name}}</a>
                         <div class="ratting">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -285,132 +288,22 @@
                     </div>
                     <div class="product-image">
                         <a href="product-detail.html">
-                            <img src="img/product-6.jpg" alt="Product Image">
+                            <img src="{{$product->thumb}}" alt="Product Image">
                         </a>
                         <div class="product-action">
                             <a href="#"><i class="fa fa-cart-plus"></i></a>
                             <a href="#"><i class="fa fa-heart"></i></a>
-                            <a href="#"><i class="fa fa-search"></i></a>
+                            <a href="/product/{{$product->id}}"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="product-price">
-                        <h3><span>$</span>99</h3>
+                        <h3><span>$</span>{{$product->Price}}</h3>
                         <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="product-item">
-                    <div class="product-title">
-                        <a href="#">Product Name</a>
-                        <div class="ratting">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="product-image">
-                        <a href="product-detail.html">
-                            <img src="img/product-7.jpg" alt="Product Image">
-                        </a>
-                        <div class="product-action">
-                            <a href="#"><i class="fa fa-cart-plus"></i></a>
-                            <a href="#"><i class="fa fa-heart"></i></a>
-                            <a href="#"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="product-price">
-                        <h3><span>$</span>99</h3>
-                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="product-item">
-                    <div class="product-title">
-                        <a href="#">Product Name</a>
-                        <div class="ratting">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="product-image">
-                        <a href="product-detail.html">
-                            <img src="img/product-8.jpg" alt="Product Image">
-                        </a>
-                        <div class="product-action">
-                            <a href="#"><i class="fa fa-cart-plus"></i></a>
-                            <a href="#"><i class="fa fa-heart"></i></a>
-                            <a href="#"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="product-price">
-                        <h3><span>$</span>99</h3>
-                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="product-item">
-                    <div class="product-title">
-                        <a href="#">Product Name</a>
-                        <div class="ratting">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="product-image">
-                        <a href="product-detail.html">
-                            <img src="img/product-9.jpg" alt="Product Image">
-                        </a>
-                        <div class="product-action">
-                            <a href="#"><i class="fa fa-cart-plus"></i></a>
-                            <a href="#"><i class="fa fa-heart"></i></a>
-                            <a href="#"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="product-price">
-                        <h3><span>$</span>99</h3>
-                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="product-item">
-                    <div class="product-title">
-                        <a href="#">Product Name</a>
-                        <div class="ratting">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="product-image">
-                        <a href="product-detail.html">
-                            <img src="img/product-10.jpg" alt="Product Image">
-                        </a>
-                        <div class="product-action">
-                            <a href="#"><i class="fa fa-cart-plus"></i></a>
-                            <a href="#"><i class="fa fa-heart"></i></a>
-                            <a href="#"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="product-price">
-                        <h3><span>$</span>99</h3>
-                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                    </div>
-                </div>
-            </div>
+            @endif
+            @endforeach
         </div>
     </div>
 </div>

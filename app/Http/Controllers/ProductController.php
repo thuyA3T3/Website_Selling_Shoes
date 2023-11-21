@@ -27,6 +27,8 @@ class ProductController extends Controller
     {
         return view('detailproduct', [
             'product' => $product,
+            'products' => $this->productService->get(),
+            'categories' => $this->productService->getMenu(),
         ]);
     }
     public function test()
@@ -42,6 +44,7 @@ class ProductController extends Controller
 
         return view('product', [
             'products' => $this->productService->getProduct($category),
+            'categories' => $this->productService->getMenu(),
         ]);
     }
 }

@@ -79,7 +79,7 @@
                         </a>
                         <a href="{{route('viewcart')}}" class="btn cart">
                             <i class="fa fa-shopping-cart"></i>
-                            <span>(0)</span>
+                            <span>{{$cart->getTotalQantity()}}</span>
                         </a>
                     </div>
                 </div>
