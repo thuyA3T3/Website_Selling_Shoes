@@ -11,6 +11,7 @@ class Cart
     public function __construct()
     {
         $this->items = session('cart') ? session('cart') : [];
+        $this->updateTotals();
     }
 
     public function list()
@@ -27,8 +28,16 @@ class Cart
             'image' => $product->thumb,
             'quantity' => $quantity
         ];
-        $this->items[$product->id] = $item;
+
+        // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
+        if (array_key_exists($product->id, $this->items)) {
+            $this->items[$product->id]['quantity'] += $quantity;
+        } else {
+            $this->items[$product->id] = $item;
+        }
+
         session(['cart' => $this->items]);
+        $this->updateTotals();
     }
 
     public function getTotalPrice()
@@ -47,6 +56,30 @@ class Cart
         foreach ($this->items as $item) {
             $total_quantity += $item['quantity'];
         }
+
         return $total_quantity;
+    }
+    public function removeAll()
+    {
+        session(['cart' => []]);
+        $this->updateTotals();
+    }
+    public function clearCart()
+    {
+        session()->forget('cart');
+        $this->updateTotals();
+    }
+    public function remove($productID)
+    {
+        if (array_key_exists($productID, $this->items)) {
+            unset($this->items[$productID]);
+            session(['cart' => $this->items]);
+            $this->updateTotals();
+        }
+    }
+    private function updateTotals()
+    {
+        $this->total_price = $this->getTotalPrice();
+        $this->total_quantity = $this->getTotalQantity();
     }
 }

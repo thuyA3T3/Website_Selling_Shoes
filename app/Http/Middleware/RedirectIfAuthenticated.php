@@ -21,7 +21,11 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                if ($guard === 'customer') {
+                    return redirect('/login_register'); // Chuyển hướng đến trang đăng nhập cho customer
+                } elseif ($guard === 'web') {
+                    return redirect('/login'); // Chuyển hướng đến trang đăng nhập cho web
+                }
             }
         }
 

@@ -3,6 +3,9 @@
 <script src="{{asset('template/lib/easing/easing.min.js')}}"></script>
 <script src="{{asset('template/lib/slick/slick.min.js')}}"></script>
 
+
 <!-- Template Javascript -->
 <script src="{{asset('template/js/main.js')}}"></script>
+<script src="{{asset('/template/admin/js/main.js')}}"></script>
+
 @yield('mainfooter')

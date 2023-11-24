@@ -11,7 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\LoginControlller;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,20 +24,28 @@ use App\Http\Controllers\LoginControlller;
 |
 */
 
-Route::get('/', [MainController::class, 'index']);
+Route::get('/', [MainController::class, 'index'])->name('home');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::get('/category/{category}', [ProductController::class, 'showcategory']);
 
 Route::get('/product/{product}', [ProductController::class, 'show']);
 Route::get('/cart', [CartController::class, 'index'])->name('viewcart');
 Route::post('/add-cart', [CartController::class, 'add'])->name('addcart');
-Route::get('/login_register', [LoginControlller::class, 'show'])->name('viewloginregister');
+Route::DELETE('/destroy/{productid}', [CartController::class, 'destroy']);
+
+Route::get('/login_register', [LoginController::class, 'show'])->name('viewloginregister');
+Route::post('/register', [LoginController::class, 'register'])->name('register');
+Route::post('/login', [LoginController::class, 'login'])->name('mainlogin');
 
 
-Route::get('/checkout', [CheckoutController::class, 'show'])->name('viewcheckout');
-Route::get('/account', [AccountController::class, 'show'])->name('viewaccount');
-Route::get('/product1', [ProductController::class, 'test']);
 
+
+Route::middleware(['customer'])->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'show'])->name('viewcheckout');
+    Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+    Route::get('/account', [AccountController::class, 'show'])->name('viewaccount');
+    Route::get('/signOut', [LoginController::class, 'signOut'])->name('logout');
+});
 
 
 

@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 
-
+@csrf
 
 <!-- Nav Bar End -->
 
@@ -39,6 +39,7 @@
                             </thead>
                             <tbody class="align-middle">
                                 @foreach($cartItems->list() as $key => $value)
+
                                 <tr>
                                     <td>
                                         <div class="img">
@@ -55,7 +56,15 @@
                                         </div>
                                     </td>
                                     <td>{{number_format($value['price'] * $value['quantity'])}}</td>
-                                    <td><button><i class="fa fa-trash"></i></button></td>
+                                    @php
+                                    $id = $value['productid'];
+                                    @endphp
+                                    <form action="/destroy/{{$id}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input hidden name="id" value="{{$id}}">
+                                        <td><button type="submit"><i class="fa fa-trash"></i></button></td>
+                                    </form>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -82,7 +91,7 @@
                                 </div>
                                 <div class="cart-btn">
                                     <button>Update Cart</button>
-                                    <button>Checkout</button>
+                                    <button onclick="window.location.href = '/checkout'">Checkout</button>
                                 </div>
                             </div>
                         </div>

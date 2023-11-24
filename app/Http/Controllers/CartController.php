@@ -22,4 +22,12 @@ class CartController extends Controller
         $cartItems = $cart;
         return view('cart', compact('cartItems'));
     }
+
+    public function destroy(Request $request)
+    {
+        $productId = $request->input('id');
+        $cart = new Cart();
+        $cart->remove($productId);
+        return redirect()->route('viewcart');
+    }
 }
