@@ -82,4 +82,18 @@ class Cart
         $this->total_price = $this->getTotalPrice();
         $this->total_quantity = $this->getTotalQantity();
     }
+    public function updateQuantity($productID, $newQuantity)
+    {
+        // Kiểm tra xem sản phẩm có tồn tại trong giỏ hàng không
+        if (array_key_exists($productID, $this->items)) {
+            // Cập nhật số lượng mới
+            $this->items[$productID]['quantity'] = $newQuantity;
+
+            // Lưu lại giỏ hàng vào session
+            session(['cart' => $this->items]);
+
+            // Cập nhật lại tổng số lượng và tổng giá
+            $this->updateTotals();
+        }
+    }
 }

@@ -92,7 +92,7 @@
                                     <img src="{{$product->thumb}}" alt="Product Image">
                                 </a>
                                 <div class="product-action">
-                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#" onclick="add_cart('{{$product->id}}', '/add-cart')"><i class="fa fa-cart-plus"></i></a>
                                     <a href="#"><i class="fa fa-heart"></i></a>
                                     <a href="/product/{{$product->id}}"><i class="fa fa-search"></i></a>
                                 </div>
@@ -163,8 +163,11 @@
                                     <img src="{{$product->thumb}}" alt="Product Image">
                                 </a>
                                 <div class="product-action">
-                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <form method="POST" action="">
+                                        @csrf
+                                        <a href="#" onclick="add_cart('{{$product->id}}', '/add-cart')"><i class="fa fa-cart-plus"></i></a>
+                                        <a href="#"><i class="fa fa-heart"></i></a>
+                                    </form>
                                     <a href="/product/{{$product->id}}"><i class="fa fa-search"></i></a>
                                 </div>
                             </div>

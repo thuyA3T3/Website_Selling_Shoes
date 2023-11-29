@@ -16,7 +16,7 @@
 <div class="breadcrumb-wrap">
     <div class="container-fluid">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item active">My Account</li>
         </ul>
     </div>
@@ -52,37 +52,32 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Product</th>
-                                        <th>Date</th>
+                                        <th>Quantity</th>
                                         <th>Price</th>
-                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($orderdetails as $key => $order)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Product Name</td>
-                                        <td>01 Jan 2020</td>
-                                        <td>$99</td>
-                                        <td>Approved</td>
+                                        <td>{{$order->id}}</td>
+                                        @php
+                                        $productIdToFind = $order->ProductID; // Thay 123 bằng id bạn đang tìm kiếm
+                                        $foundProduct = null;
+
+                                        foreach ($products as $product) {
+                                        if ($product['id'] == $productIdToFind) {
+                                        $foundProduct = $product;
+                                        break;
+                                        }
+                                        }
+                                        @endphp
+                                        <td>{{$foundProduct->Name}}</td>
+                                        <td>{{$foundProduct->updated_at }}</td>
+                                        <td>{{$foundProduct->Price * $order->Quantity}}</td>
                                         <td><button class="btn">View</button></td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Product Name</td>
-                                        <td>01 Jan 2020</td>
-                                        <td>$99</td>
-                                        <td>Approved</td>
-                                        <td><button class="btn">View</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Product Name</td>
-                                        <td>01 Jan 2020</td>
-                                        <td>$99</td>
-                                        <td>Approved</td>
-                                        <td><button class="btn">View</button></td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

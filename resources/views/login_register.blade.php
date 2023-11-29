@@ -28,14 +28,14 @@
                     <div class="row">@include('admin.alert')</div>
                     <div class="row">
 
-                        <form class="row" action="{{route('register')}}" method="post">
+                        <form id="reloadSection" class="row" action="/send" method="post">
                             @csrf
                             <div class="col-md-6">
                                 <label>First Name</label>
                                 <input class="form-control" name="firstName" type="text" placeholder="First Name">
                             </div>
                             <div class="col-md-6">
-                                <label>Last Name"</label>
+                                <label>Last Name</label>
                                 <input class="form-control" name="lastName" type="text" placeholder="Last Name">
                             </div>
                             <div class="col-md-6">
@@ -55,7 +55,7 @@
                                 <input class="form-control" name="confirmPassword" type="text" placeholder="Password">
                             </div>
                             <div class="col-md-12">
-                                <button type="submit" class="btn">Submit</button>
+                                <button type="submit" onclick="reloadSection()" class="btn">Submit</button>
                             </div>
                         </form>
                     </div>

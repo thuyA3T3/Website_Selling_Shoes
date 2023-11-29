@@ -50,9 +50,13 @@
                                     <td>{{number_format($value['price'])}}</td>
                                     <td>
                                         <div class="qty">
-                                            <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                            <input type="text" value="{{$value['quantity']}}">
-                                            <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                            <form method="POST" action="{{ route('updateCart') }}">
+                                                @csrf
+                                                <input hidden name="id" value="{{$value['productid']}}">
+                                                <button type="submit" class="btn-minus"><i class="fa fa-minus"></i></button>
+                                                <input name="quantityProduct" type="text" value="{{$value['quantity']}}">
+                                                <button type="submit" class="btn-plus"><i class="fa fa-plus"></i></button>
+                                            </form>
                                         </div>
                                     </td>
                                     <td>{{number_format($value['price'] * $value['quantity'])}}</td>

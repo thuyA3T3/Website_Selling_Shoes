@@ -12,9 +12,25 @@ class CartController extends Controller
     //
     public function add(Request $request, Cart $cart)
     {
-        $product = Product::find($request->id);
-        $quantity = $request->quantity;
+        $product = Product::find($request->input('id'));
+        $quantity = $request->input('quantity') ?? 1;
         $cart->add($product, $quantity);
+        return response()->json(['message' => 'Success']);
+    }
+    public function add1(Request $request, Cart $cart)
+    {
+        $product = Product::find($request->input('id'));
+        $quantity = $request->input('quantity') ?? 1;
+        $cart->add($product, $quantity);
+        return redirect()->route('viewcart');
+    }
+    public function update(Request $request)
+    {
+        dd($request);
+        $id = $request->input('id');
+        $quantity = $request->input('quantityProduct');
+        $cart = new Cart();
+        $cart->updateQuantity($id, $quantity);
         return redirect()->route('viewcart');
     }
     public function index(Cart $cart)

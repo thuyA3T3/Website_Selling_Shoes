@@ -36,15 +36,15 @@
                                     <h4>Price:</h4>
                                     <p>${{$product->Price}} <span>${{$product->Price + 20.00}}</span></p>
                                 </div>
-                                <form action="{{route('addcart')}}" method="post">
+                                <form action="{{route('addcart1')}}" method="post">
                                     @csrf
                                     <input type="hidden" name="id" value="{{$product->id}}">
                                     <div class="quantity">
                                         <h4>Quantity:</h4>
                                         <div class="qty">
-                                            <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                            <button class="btn-minus" type="button"><i class="fa fa-minus"></i></button>
                                             <input type="text" value="1" name="quantity">
-                                            <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                            <button class="btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
                                     <div class="p-size">
@@ -226,7 +226,7 @@
                                 <img src="{{$product->thumb}}" alt="Product Image">
                             </a>
                             <div class="product-action">
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                <a href="#" onclick="add_cart('{{$product->id}}', '/add-cart')"><i class="fa fa-cart-plus"></i></a>
                                 <a href="#"><i class="fa fa-heart"></i></a>
                                 <a href="/product/{{$product->id}}"><i class="fa fa-search"></i></a>
                             </div>

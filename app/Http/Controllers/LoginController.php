@@ -17,8 +17,9 @@ class LoginController extends Controller
     {
         return view('login_register');
     }
-    public function register(RegisterRequest $request)
+    public function register(Request $request)
     {
+        dd($request);
         $data['FirstName'] = $request->firstName;
         $data['LastName'] = $request->lastName;
         $data['Email'] = $request->email;
@@ -27,7 +28,6 @@ class LoginController extends Controller
 
         Customer::create($data);
         Session::flash('success', 'Đăng ký thành công');
-        return redirect()->route('viewloginregister');
     }
     public function login(Request $request)
     {
