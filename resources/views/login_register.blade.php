@@ -24,8 +24,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6">
+                <div class="row">@include('admin.alert')</div>
                 <div class="register-form">
-                    <div class="row">@include('admin.alert')</div>
+
                     <div class="row">
 
                         <form id="reloadSection" class="row" action="/send" method="post">
@@ -55,7 +56,7 @@
                                 <input class="form-control" name="confirmPassword" type="text" placeholder="Password">
                             </div>
                             <div class="col-md-12">
-                                <button type="submit" onclick="reloadSection()" class="btn">Submit</button>
+                                <button type="submit" class="btn">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -76,8 +77,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="remember" class="custom-control-input" id="newaccount">
-                                    <label class="custom-control-label" for="newaccount">Keep me signed in</label>
+
+                                    <a href="{{route('showNewPass')}}"></span>Forgot Password</a>
                                 </div>
                             </div>
                             <div class="col-md-12">

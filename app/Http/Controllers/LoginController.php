@@ -17,18 +17,6 @@ class LoginController extends Controller
     {
         return view('login_register');
     }
-    public function register(Request $request)
-    {
-        dd($request);
-        $data['FirstName'] = $request->firstName;
-        $data['LastName'] = $request->lastName;
-        $data['Email'] = $request->email;
-        $data['Phone'] = $request->phone;
-        $data['password'] = Hash::make($request->password);
-
-        Customer::create($data);
-        Session::flash('success', 'Đăng ký thành công');
-    }
     public function login(Request $request)
     {
         $this->validate($request, [

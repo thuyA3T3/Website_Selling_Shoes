@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Cart;
 use App\Http\Controllers\Controller;
 use App\Http\Services\CheckoutService;
+use App\Models\Oder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,5 +32,15 @@ class CheckoutController extends Controller
         $customer = Auth::guard('customer')->user();
         $address = $request->address1 . ', ' . $request->address2 . ', ' . $request->address3;
         $result = $this->checkoutService->oder($customer, $carts, $address);
+        return redirect()->route('viewaccount');
+    }
+    public function accept(Oder $oder, $token)
+    {
+        return redirect()->route('viewaccount');
+    }
+    public function refuse(Oder $oder, $token)
+    {
+        $oder->delete();
+        return redirect()->route('viewaccount');
     }
 }

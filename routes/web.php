@@ -37,9 +37,17 @@ Route::post('/updateCart', [CartController::class, 'update'])->name('updateCart'
 
 Route::DELETE('/destroy/{productid}', [CartController::class, 'destroy']);
 Route::get('/login_register', [LoginController::class, 'show'])->name('viewloginregister');
-Route::post('/register', [LoginController::class, 'register'])->name('register');
+Route::get('/register', [AccountController::class, 'register'])->name('register');
+Route::get('/noregister', [AccountController::class, 'noregister'])->name('noregister');
 Route::post('/login', [LoginController::class, 'login'])->name('mainlogin');
 Route::post('/send', [AccountController::class, 'send']);
+Route::get('forgot-password', [AccountController::class, 'showNewPass'])->name('showNewPass');
+Route::get('send-forgot-password', [AccountController::class, 'sendNewPass'])->name('sendNewPass');
+Route::get('accept-password', [AccountController::class, 'accept'])->name('acceptPass');
+Route::get('refuse-password', [AccountController::class, 'refuse'])->name('refusePass');
+
+
+
 
 Route::middleware(['customer'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'show'])->name('viewcheckout');
@@ -47,6 +55,8 @@ Route::middleware(['customer'])->group(function () {
     Route::get('/account', [AccountController::class, 'show'])->name('viewaccount');
     Route::get('/signOut', [LoginController::class, 'signOut'])->name('logout');
     Route::get('/viewOder', [AccountController::class, 'order'])->name('order');
+    Route::get('/accept-order/{oder}/{token}', [CheckoutController::class, 'accept'])->name('accept');
+    Route::get('/refuse-order/{oder}/{token}', [CheckoutController::class, 'refuse'])->name('refuse');
 });
 
 

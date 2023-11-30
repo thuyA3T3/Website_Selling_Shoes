@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\Helpers\Cart;
 use App\Models\Oder;
 use App\Models\OrderDetail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Can;
 
 class CheckoutService
@@ -22,6 +23,10 @@ class CheckoutService
             $datadetail['Address'] = $address;
             $oderdetail = OrderDetail::create($datadetail);
         }
+        Mail::send('send', compact('oder', 'oderdetail', 'customer'), function ($email) use ($customer) {
+            $email->subject('Check order');
+            $email->to($customer->Email, $customer->FirstName . $customer->LastName);
+        });
         $removeCart = new Cart();
         $removeCart->clearCart();
     }

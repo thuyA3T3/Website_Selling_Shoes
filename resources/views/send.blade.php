@@ -8,18 +8,16 @@
 </head>
 
 <body>
-    <h1>Email Confirmation for {{ $data['firstName'] }}</h1>
+    <h1>Confirmation message sent {{ $customer->FirstName . $customer->LastName}}</h1>
     <p></p>
-    <p>Please click one of the following links:</p>
+    <p>Please click on one of the following options:</p>
 
-    <form id="approvalForm" action="{{ route('register') }}" method="post" style="display: inline;">
-        @csrf
-        <button type="submit">hh</button>
+    <form id="approvalForm" action="{{ route('accept',['oder'=>$oder->id, 'token'=>'dghfhjsdgjksd']) }}" method="GET" style="display: inline;">
+        <button type="submit">Xác Nhận</button>
     </form>
 
-    <form id="rejectForm" action="#" method="post" style="display: inline;" onclick="getsend('reject'); return false;">
-        @csrf
-        <button type="submit">Reject</button>
+    <form id="rejectForm" action="{{ route('refuse',['oder'=>$oder->id, 'token'=>'dghfhjsdgjksd']) }}" method="GET" style="display: inline;">
+        <button type="submit">Từ chối</button>
     </form>
 
 

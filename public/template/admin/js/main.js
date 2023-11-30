@@ -45,25 +45,7 @@ function add_cart(id, url) {
         }
     });
 }
-$(document).ready(function () {
-    $('.btn-minus, .btn-plus').on('click', function () {
-        var form = $(this).closest('.quantity-form');
-        var formData = form.serialize();
-        var url = form.attr('action');
 
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: formData,
-            success: function (data) {
-                // Xử lý kết quả Ajax nếu cần
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    });
-});
 
 
 // function reloadSection() {
@@ -75,8 +57,6 @@ $(document).ready(function () {
 //     var confirmPassword = $('input[name="confirmPassword"]').val();
 
 //     // Hiển thị biểu tượng reload xoay giữa màn hình
-//     $('#reloadSection').html('<i class="fa fa-spinner fa-spin"></i> Đang xác thực...');
-
 //     // Gửi AJAX request để xác thực và cập nhật nội dung
 //     $.ajax({
 //         type: 'POST',
