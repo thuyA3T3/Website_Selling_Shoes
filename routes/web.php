@@ -29,6 +29,8 @@ Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::get('/category/{category}', [ProductController::class, 'showcategory']);
 
 Route::get('/product/{product}', [ProductController::class, 'show']);
+Route::post('/search', [ProductController::class, 'searchProducts']);
+
 Route::get('/cart', [CartController::class, 'index'])->name('viewcart');
 Route::post('/add-cart1', [CartController::class, 'add1'])->name('addcart1');
 Route::post('/add-cart', [CartController::class, 'add'])->name('addcart');
@@ -51,6 +53,7 @@ Route::get('refuse-password', [AccountController::class, 'refuse'])->name('refus
 
 Route::middleware(['customer'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'show'])->name('viewcheckout');
+    Route::get('/checkout-bynow/{id}', [CheckoutController::class, 'bynow'])->name('viewcheckoutbynow');
     Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
     Route::get('/account', [AccountController::class, 'show'])->name('viewaccount');
     Route::get('/signOut', [LoginController::class, 'signOut'])->name('logout');

@@ -10,6 +10,24 @@ use Illuminate\Validation\Rules\Can;
 
 class CheckoutService
 {
+    public function oder1($customer, $product, $address)
+    {
+        $data['CustomerID'] = $customer->id;
+        $data['OrderDate'] = now();
+        $data['TotalAmount'] = $product->Price + 1;
+        $oder = Oder::create($data);
+        $datadetail['OrderID'] = $oder->id;
+        $datadetail['ProductID'] = $product->id;
+        $datadetail['Quantity'] = 1;
+        $datadetail['Address'] = $address;
+        $oderdetail = OrderDetail::create($datadetail);
+        Mail::send('send', compact('oder', 'oderdetail', 'customer'), function ($email) use ($customer) {
+            $email->subject('Check order');
+            $email->to($customer->Email, $customer->FirstName . $customer->LastName);
+        });
+        $removeCart = new Cart();
+        $removeCart->clearCart();
+    }
     public function oder($customer, $carts, $address)
     {
         foreach ($carts->list() as $cart) {

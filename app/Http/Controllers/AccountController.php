@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 
 class AccountController extends Controller
@@ -21,12 +22,17 @@ class AccountController extends Controller
     //
     public function show()
     {
-        $orderdetals = OrderDetail::all();
+        $customer = Auth::guard('customer')->user();
+        $orders = Oder::where('CustomerID', $customer->id)->get();
+        $orderdetails = [];
+        foreach ($orders as $order) {
+            $orderdetails = array_merge($orderdetails, $order->orderDetails->toArray());
+        }
         $products = Product::all();
 
         return view('myaccount', [
 
-            'orderdetails' => $orderdetals,
+            'orderdetails' => $orderdetails,
             'products' => $products,
         ]);
     }
@@ -59,21 +65,26 @@ class AccountController extends Controller
     }
     public function send(RegisterRequest $request)
     {
-        $data = [
-            'subject' => 'Shop ban giay',
-            'firstName' => $request->input('firstName'),
-            'lastName' => $request->input('lastName'),
-            'email' => $request->input('email'),
-            'phone' => $request->input('phone'),
-            'password' => $request->input('password'),
-            'confirmPassword' => $request->input('confirmPassword'),
-        ];
+        $customer = Customer::where('email', $request->input('email'))->first();
+        if (!$customer) {
+            $data = [
+                'subject' => 'Shop ban giay',
+                'firstName' => $request->input('firstName'),
+                'lastName' => $request->input('lastName'),
+                'email' => $request->input('email'),
+                'phone' => $request->input('phone'),
+                'password' => $request->input('password'),
+                'confirmPassword' => $request->input('confirmPassword'),
+            ];
 
-        Mail::send('sendregister', compact('data'), function ($email) use ($data) {
-            $email->subject('Check register');
-            $email->to($data['email'], $data['firstName'] . $data['lastName']);
-        });
-        Session::flash('success', 'Hãy xác nhận đăng ký qua email của bạn');
+            Mail::send('sendregister', compact('data'), function ($email) use ($data) {
+                $email->subject('Check register');
+                $email->to($data['email'], $data['firstName'] . $data['lastName']);
+            });
+            Session::flash('success', 'Hãy xác nhận đăng ký qua email của bạn');
+            return redirect()->route('viewloginregister');
+        }
+        Session::flash('error', 'Email đã tồn tại');
         return redirect()->route('viewloginregister');
     }
     public function showNewPass()

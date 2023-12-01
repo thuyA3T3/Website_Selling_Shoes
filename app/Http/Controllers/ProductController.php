@@ -47,4 +47,30 @@ class ProductController extends Controller
             'categories' => $this->productService->getMenu(),
         ]);
     }
+    function searchProducts(Request $request)
+    {
+        $productName = $request->text;
+        $categoryName = $request->text;
+        $query1 = Product::query();
+        $query2 = Product::query();
+
+
+        if ($productName) {
+            $query1->where('Name', 'like', '%' . $productName . '%');
+        }
+
+        if ($categoryName) {
+            $query2->whereHas('category', function ($query) use ($categoryName) {
+                $query->where('name', $categoryName);
+            });
+        }
+
+        $result1 = $query1->get();
+        $result2 = $query2->get();
+        $combinedResult = $result1->merge($result2)->unique();
+        return view('product', [
+            'products' => $combinedResult,
+            'categories' => $this->productService->getMenu()
+        ]);
+    }
 }

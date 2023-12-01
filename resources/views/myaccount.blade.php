@@ -60,9 +60,9 @@
                                 <tbody>
                                     @foreach($orderdetails as $key => $order)
                                     <tr>
-                                        <td>{{$order->id}}</td>
+                                        <td>{{$key+1}}</td>
                                         @php
-                                        $productIdToFind = $order->ProductID; // Thay 123 bằng id bạn đang tìm kiếm
+                                        $productIdToFind = $order['ProductID'];
                                         $foundProduct = null;
 
                                         foreach ($products as $product) {
@@ -72,9 +72,9 @@
                                         }
                                         }
                                         @endphp
-                                        <td>{{$foundProduct->Name}}</td>
-                                        <td>{{$foundProduct->updated_at }}</td>
-                                        <td>{{$foundProduct->Price * $order->Quantity}}</td>
+                                        <td>{{$foundProduct['Name']}}</td>
+                                        <td>{{$foundProduct['updated_at'] }}</td>
+                                        <td>{{$foundProduct['Price'] * $order['Quantity']}}</td>
                                         <td><button class="btn">View</button></td>
                                     </tr>
                                     @endforeach

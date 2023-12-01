@@ -67,7 +67,7 @@
                                     <div class="action">
                                         <button type="submit" class="btn" href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</button>
                                 </form>
-                                <a class="btn" href="{{route('viewcheckout')}}"><i class="fa fa-shopping-bag"></i>Buy Now</a>
+                                <a class="btn" href="{{route('viewcheckoutbynow',['id'=>$product->id])}}"><i class="fa fa-shopping-bag"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="product-price">
                                     <h3><span>$</span>{{$product->Price}}</h3>
-                                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                    <a class="btn" href="{{route('viewcheckoutbynow',['id'=>$product->id])}}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                                 </div>
                             </div>
                         </div>
@@ -233,7 +233,7 @@
                         </div>
                         <div class="product-price">
                             <h3><span>$</span>{{$product->Price}}</h3>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                            <a class="btn" href="{{route('viewcheckoutbynow',['id'=>$product->id])}}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                         </div>
                     </div>
                     @endforeach

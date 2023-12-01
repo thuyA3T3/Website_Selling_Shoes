@@ -236,7 +236,7 @@
                     </div>
                     <div class="product-price">
                         <h3><span>$</span>{{$product->Price}}</h3>
-                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                        <a href="{{route('viewcheckoutbynow',['id'=>$product->id])}}" class="btn"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                     </div>
                 </div>
             </div>

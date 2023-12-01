@@ -36,6 +36,9 @@
                         <h2>Billing Address</h2>
                         <form action="{{ route('checkout') }}" method="post">
                             @csrf
+                            @if(isset($product))
+                            <input type="hidden" name="productID" value="{{ $product->id }}">
+                            @endif
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>First Name</label>
@@ -142,9 +145,9 @@
                 <div class="checkout-inner">
                     <div class="checkout-summary">
                         <h1>Cart Total</h1>
-                        <p class="sub-total">Sub Total<span>{{ $cartItems->getTotalPrice()}}</span></p>
+                        <p class="sub-total">Sub Total<span>{{ isset($cartItems) ? $cartItems->getTotalPrice() : $product->Price }}</span></p>
                         <p class="ship-cost">Shipping Cost<span>$1</span></p>
-                        <h2>Grand Total<span>{{ $cartItems->getTotalPrice()+1}}</span></h2>
+                        <h2>Grand Total<span>{{ isset($cartItems) ? $cartItems->getTotalPrice()+1 : $product->Price +1}}</span></h2>
                     </div>
 
                     <div class="checkout-payment">

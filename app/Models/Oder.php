@@ -27,6 +27,10 @@ class Oder extends Model
         'OrderDate',
         'TotalAmount',
     ];
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class, 'OrderID', 'id');
+    }
 
     /**
      * Indicates if the model should be timestamped.

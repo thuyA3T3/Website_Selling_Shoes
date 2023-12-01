@@ -26,7 +26,6 @@ class CartController extends Controller
     }
     public function update(Request $request)
     {
-        dd($request);
         $id = $request->input('id');
         $quantity = $request->input('quantityProduct');
         $cart = new Cart();
