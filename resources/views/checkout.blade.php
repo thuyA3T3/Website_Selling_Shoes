@@ -58,11 +58,11 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label>Address</label>
-                                    <input name="address1" class="form-control" type="text" placeholder="Address">
+                                    <input name="address1" class="form-control" value="{{old('address1')}}" type="text" placeholder="Address">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Country</label>
-                                    <select name="address2" class="custom-select">
+                                    <select name="address2" value="{{old('address2')}}" class="custom-select">
                                         <option selected>Viet Nam</option>
                                         <option>China</option>
                                         <option>Japan</option>
@@ -71,11 +71,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>City</label>
-                                    <input name="address3" class="form-control" type="text" placeholder="City">
+                                    <input name="address3" value="{{old('address3')}}" class="form-control" type="text" placeholder="City">
                                 </div>
                                 <div class="col-md-6">
                                     <label>State</label>
-                                    <input name="address4" class="form-control" type="text" placeholder="State">
+                                    <input name="address4" value="{{old('address4')}}" class="form-control" type="text" placeholder="State">
                                 </div>
 
                                 <div class="col-md-12">
