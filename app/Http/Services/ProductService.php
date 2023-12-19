@@ -25,6 +25,7 @@ class ProductService
                 'Price' => (float) $request->input("Price"), // Sử dụng kiểu dữ liệu số thập phân thay vì chuỗi
                 'CategoryID' => (int) $request->input("CategoryID"), // Sử dụng kiểu dữ liệu số nguyên thay vì chuỗi
                 'thumb' => (string) $request->input("thumb"),
+                'shop_id' => (int) $request->input("shop_id"),
             ]);
             Session::flash('success', 'Thêm sản phẩm thành công');
         } catch (Exception $err) {
@@ -40,18 +41,22 @@ class ProductService
             ->orderByDesc('id')->paginate(15);
     }
 
-    public function update($product, $request)
+    public function update($product, $data)
     {
         try {
-            $product->fill($request->input());
-            $product->save();
-            Session::flash('success', 'Cập nhật thành công sản phẩm');
-        } catch (Exception $error) {
-            Session::flash('error', 'Có lỗi vui lòng thủ lại');
-            Log::info($error->getMessage());
+            // Cập nhật thông tin sản phẩm
+            $product->update([
+                'Name' => $data['Name'],
+                'CategoryID' => $data['CategoryID'],
+                'Price' => $data['Price'],
+                'Description' => $data['Description'],
+                'thumb' => $data['thumb'],
+            ]);
+            return true;
+        } catch (\Exception $error) {
+            Log::error($error->getMessage());
             return false;
         }
-        return true;
     }
 
     public function destroy($request)

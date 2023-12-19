@@ -73,7 +73,15 @@
                     </div>
                 </div>
             </div>
-
+            <div class="shop-info row">
+                <div class="col-lg-1">
+                    <img src="{{$shop->thumb}}" alt="{{ $shop->name }} Image" width="100px" height="100px" class="rounded-circle border border-danger">
+                </div>
+                <div class="col-lg-11">
+                    <h2>{{$shop->name}}</h2>
+                    <button type="button" class="btn btn-outline-primary">Chat Now</button>
+                </div>
+            </div>
             <div class="row product-detail-bottom">
                 <div class="col-lg-12">
                     <ul class="nav nav-pills nav-justified">
@@ -92,7 +100,7 @@
                         <div id="description" class="container tab-pane active">
                             <h4>Product description</h4>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque. Suspendisse sit amet neque neque. Praesent suscipit et magna eu iaculis. Donec arcu libero, commodo ac est a, malesuada finibus dolor. Aenean in ex eu velit semper fermentum. In leo dui, aliquet sit amet eleifend sit amet, varius in turpis. Maecenas fermentum ut ligula at consectetur. Nullam et tortor leo.
+                                {{$product->Description}}
                             </p>
                         </div>
                         <div id="specification" class="container tab-pane fade">

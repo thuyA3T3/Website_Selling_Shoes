@@ -1,6 +1,59 @@
 (function ($) {
     "use strict";
-    
+
+    $(document).ready(function () {
+        var editBtn = $('.edit-btn');
+        var editForm = $('.edit-form');
+
+        editBtn.click(function (event) {
+            event.preventDefault();
+            // Hiển thị form chỉnh sửa
+            editForm.show();
+        });
+
+        // Bắt sự kiện click ngoài form để đóng form
+        $(document).mouseup(function (e) {
+            if (!editForm.is(e.target) && editForm.has(e.target).length === 0 && !editBtn.is(e.target)) {
+                // Nếu click không phải là trên form hoặc nút chỉnh sửa, đóng form
+                editForm.hide();
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var editBtn = document.querySelector('.edit-btn');
+        var editForm = document.querySelector('.edit-form');
+
+        editBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+            // Hiển thị form chỉnh sửa
+            editForm.style.display = 'block';
+        });
+
+        // Bắt sự kiện click ngoài form để đóng form
+        document.addEventListener('click', function (event) {
+            // Kiểm tra xem sự kiện click có xuất phát từ .edit-form hay không
+            if (!editForm.contains(event.target) && event.target !== editBtn) {
+                // Nếu click không phải là trên form hoặc nút chỉnh sửa, đóng form
+                editForm.style.display = 'none';
+            }
+        });
+    });
+
+
+    $(document).ready(function () {
+        $("#addProductBtn").click(function () {
+            $("#addProductForm").toggle();
+        });
+
+        $(document).mouseup(function (e) {
+            var container = $("#addProductForm");
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                container.hide();
+            }
+        });
+    });
+
     // Dropdown on mouse hover
     $(document).ready(function () {
         function toggleNavbarMethod() {
@@ -17,8 +70,8 @@
         toggleNavbarMethod();
         $(window).resize(toggleNavbarMethod);
     });
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
@@ -28,11 +81,11 @@
         }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
-    
-    
+
+
     // Header slider
     $('.header-slider').slick({
         autoplay: true,
@@ -41,8 +94,8 @@
         slidesToShow: 1,
         slidesToScroll: 1
     });
-    
-    
+
+
     // Product Slider 4 Column
     $('.product-slider-4').slick({
         autoplay: true,
@@ -77,8 +130,8 @@
             },
         ]
     });
-    
-    
+
+
     // Product Slider 3 Column
     $('.product-slider-3').slick({
         autoplay: true,
@@ -107,8 +160,8 @@
             },
         ]
     });
-    
-    
+
+
     // Product Detail Slider
     $('.product-slider-single').slick({
         infinite: true,
@@ -127,8 +180,8 @@
         focusOnSelect: true,
         asNavFor: '.product-slider-single'
     });
-    
-    
+
+
     // Brand Slider
     $('.brand-slider').slick({
         speed: 5000,
@@ -170,8 +223,8 @@
             }
         ]
     });
-    
-    
+
+
     // Review slider
     $('.review-slider').slick({
         autoplay: true,
@@ -188,8 +241,8 @@
             }
         ]
     });
-    
-    
+
+
     // Widget slider
     $('.sidebar-slider').slick({
         autoplay: true,
@@ -198,8 +251,8 @@
         slidesToShow: 1,
         slidesToScroll: 1
     });
-    
-    
+
+
     // Quantity
     $('.qty button').on('click', function () {
         var $button = $(this);
@@ -215,18 +268,18 @@
         }
         $button.parent().find('input').val(newVal);
     });
-    
-    
+
+
     // Shipping address show hide
     $('.checkout #shipto').change(function () {
-        if($(this).is(':checked')) {
+        if ($(this).is(':checked')) {
             $('.checkout .shipping-address').slideDown();
         } else {
             $('.checkout .shipping-address').slideUp();
         }
     });
-    
-    
+
+
     // Payment methods show hide
     $('.checkout .payment-method .custom-control-input').change(function () {
         if ($(this).prop('checked')) {

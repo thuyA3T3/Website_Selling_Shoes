@@ -33,21 +33,21 @@
             <div class="col-md-6">
                 <div class="header-slider normal-slider">
                     <div class="header-slider-item d-flex align-items-center">
-                        <img src="img/1_1.webp" alt="Slider Image" class="mx-auto" />
+                        <img src="img/1_1_2.webp" alt="Slider Image" class="mx-auto" />
                         <div class="header-slider-caption">
                             <p>{{$categories[0]->name}}</p>
                             <a class="btn" href="/category/{{$categories[0]->id}}"><i class="fa fa-shopping-cart"></i>Shop Now</a>
                         </div>
                     </div>
                     <div class="header-slider-item d-flex align-items-center">
-                        <img src="img/1_2.webp" alt="Slider Image" class="mx-auto" />
+                        <img src="img/1_1_3.webp" alt="Slider Image" class="mx-auto" />
                         <div class="header-slider-caption">
                             <p>{{$categories[1]->name}}</p>
                             <a class="btn" href="/category/{{$categories[1]->id}}"><i class="fa fa-shopping-cart"></i>Shop Now</a>
                         </div>
                     </div>
                     <div class="header-slider-item d-flex align-items-center">
-                        <img src="img/1_3.webp" alt="Slider Image" class="mx-auto" />
+                        <img src="img/aa.jpg" alt="Slider Image" class="mx-auto" />
                         <div class="header-slider-caption">
                             <p>{{$categories[2]->name}}</p>
                             <a class="btn" href="/category/{{$categories[2]->id}}"><i class="fa fa-shopping-cart"></i>Shop Now</a>
@@ -58,13 +58,13 @@
             <div class="col-md-3">
                 <div class="header-img">
                     <div class="img-item">
-                        <img src="img/1_2.webp" />
+                        <img src="img/1_1_4.jpg" />
                         <a class="img-text" href="/category/{{$categories[3]->id}}">
                             <p>{{$categories[3]->name}}</p>
                         </a>
                     </div>
                     <div class="img-item">
-                        <img src="img/1_5.webp" />
+                        <img src="img/1_1_5.jpg" />
                         <a class="img-text" href="/category/{{$categories[4]->id}}">
                             <p>{{$categories[4]->name}}</p>
                         </a>
@@ -142,7 +142,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="category-item ch-400">
-                    <img src="img/1_1.webp" />
+                    <img src="img/1_1_2.webp" />
                     <a class="category-name" href="/category/{{$categories[0]->id}}">
                         <p>{{$categories[0]->name}}</p>
                     </a>
@@ -150,13 +150,13 @@
             </div>
             <div class="col-md-3">
                 <div class="category-item ch-250">
-                    <img src="img/1_2.webp" />
+                    <img src="img/1_1_3.webp" />
                     <a class="category-name" href="/category/{{$categories[1]->id}}">
                         <p>{{$categories[1]->name}}</p>
                     </a>
                 </div>
                 <div class="category-item ch-150">
-                    <img src="img/1slider-1.jpg" />
+                    <img src="img/aa.jpg" />
                     <a class="category-name" href="/category/{{$categories[2]->id}}">
                         <p>{{$categories[2]->name}}</p>
                     </a>
@@ -164,13 +164,13 @@
             </div>
             <div class="col-md-3">
                 <div class="category-item ch-150">
-                    <img src="img/2slider.jpg" />
+                    <img src="img/1_1_4.jpg" />
                     <a class="category-name" href="/category/{{$categories[3]->id}}">
                         <p>{{$categories[3]->name}}</p>
                     </a>
                 </div>
                 <div class="category-item ch-250">
-                    <img src="img/1_5.webp" />
+                    <img src="img/1_1_5.jpg" />
                     <a class="category-name" href="/category/{{$categories[4]->id}}">
                         <p>{{$categories[4]->name}}</p>
                     </a>
@@ -178,7 +178,7 @@
             </div>
             <div class="col-md-3">
                 <div class="category-item ch-400">
-                    <img src="img/1_3.webp" />
+                    <img src="img/1_7.jpeg" />
                     <a class="category-name" href="{{route('product')}}">
                         <p>All</p>
                     </a>

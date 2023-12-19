@@ -15,25 +15,52 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\Product\ProductRequest;
+use App\Http\Services\ProductService;
+use App\Models\Shop;
 
 class AccountController extends Controller
 {
     //
+    protected $productService;
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
     public function show()
     {
         $customer = Auth::guard('customer')->user();
+        $shops = Shop::where('customer_id', $customer->id)->get();
         $orders = Oder::where('CustomerID', $customer->id)->get();
         $orderdetails = [];
         foreach ($orders as $order) {
             $orderdetails = array_merge($orderdetails, $order->orderDetails->toArray());
         }
         $products = Product::all();
+        $resultArray = [];
+
+        foreach ($shops as $shop) {
+
+            $shop = Shop::with('products.orders')->find($shop->id);
+
+
+
+            foreach ($shop->products as $product) {
+                $shopID = $shop->id;
+                $productName = $product->Name;
+                $orderCount = $product->orders->count();
+                $resultArray[] = compact('shopID', 'productName', 'orderCount');
+            }
+        }
+        $sortedResultArray = collect($resultArray)->sortByDesc('orderCount')->values()->all();
 
         return view('myaccount', [
-
+            'customer' => $customer,
             'orderdetails' => $orderdetails,
             'products' => $products,
+            'menus'  => $this->productService->getMenu(),
+            'shops' => $shops,
+            'resultArray' => $sortedResultArray,
         ]);
     }
 

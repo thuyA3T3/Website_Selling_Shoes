@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\ProductService;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Shop;
 
 class ProductController extends Controller
 {
@@ -25,10 +26,13 @@ class ProductController extends Controller
     }
     public function show(Product $product)
     {
+
+        $shop = $product->shop;
         return view('detailproduct', [
             'product' => $product,
             'products' => $this->productService->get(),
             'categories' => $this->productService->getMenu(),
+            'shop' => $shop,
         ]);
     }
     public function test()

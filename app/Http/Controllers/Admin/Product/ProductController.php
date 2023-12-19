@@ -50,8 +50,23 @@ class ProductController extends Controller
 
     public function update(Product $product, ProductRequest $request)
     {
-        $this->productService->update($product, $request);
-        return redirect('/admin/product/list');
+        // $request->validate([
+        //     'Name' => 'required|string|max:255',
+        //     'CategoryID' => 'required|exists:categories,id',
+        //     'Price' => 'required|numeric',
+        //     'Description' => 'nullable|string',
+        //     'thumb' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
+
+        // Gọi hàm update từ service và truyền dữ liệu cần thiết
+        $result = $this->productService->update($product, $request->all());
+
+        // Kiểm tra kết quả và thực hiện chuyển hướng
+        if ($result) {
+            return redirect()->back();
+        } else {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại.');
+        }
     }
 
     public function destroy(Request $request)

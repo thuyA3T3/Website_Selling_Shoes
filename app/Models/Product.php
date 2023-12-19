@@ -34,6 +34,7 @@ class Product extends Model
         'Price',
         'CategoryID',
         'thumb',
+        'shop_id',
     ];
 
     /**
@@ -46,8 +47,16 @@ class Product extends Model
     /**
      * Get the category associated with the product.
      */
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
     public function category()
     {
         return $this->belongsTo(Category::class, 'CategoryID');
+    }
+    public function orders()
+    {
+        return $this->hasMany(OrderDetail::class, 'ProductID');
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,15 @@ Route::middleware(['customer'])->group(function () {
     Route::get('/viewOder', [AccountController::class, 'order'])->name('order');
     Route::get('/accept-order/{oder}/{token}', [CheckoutController::class, 'accept'])->name('accept');
     Route::get('/refuse-order/{oder}/{token}', [CheckoutController::class, 'refuse'])->name('refuse');
+    Route::post('/upgrade', [ShopController::class, 'addShop'])->name('addShop');
+});
+
+Route::group(['middleware' => 'check.seller.role'], function () {
+    Route::get('/seller-dashboard', 'SellerController@dashboard');
+    Route::post('/add', [ShopController::class, 'store'])->name('addproduct1');
+    Route::get('/edit/{product}', [AdminProdcuctController::class, 'show']);
+    Route::post('/edit/{product}', [AdminProdcuctController::class, 'update'])->name('updateproduct');
+    Route::DELETE('/destroy', [AdminProdcuctController::class, 'destroy']);
 });
 
 
@@ -82,9 +92,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('add', [AdminProdcuctController::class, 'create'])->name('viewaddproduct');
             Route::post('add', [AdminProdcuctController::class, 'store'])->name('addproduct');
             Route::get('list', [AdminProdcuctController::class, 'index'])->name('viewproduct');
-            Route::get('edit/{product}', [AdminProdcuctController::class, 'show']);
-            Route::post('edit/{product}', [AdminProdcuctController::class, 'update'])->name('updateproduct');
-            Route::DELETE('destroy', [AdminProdcuctController::class, 'destroy']);
         });
         Route::post('upload/services', [UploadController::class, 'store']);
     });
