@@ -8,6 +8,176 @@ body {
     background: #f3f6ff;
 }
 
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    cursor: pointer;
+    font-size: 3em;
+    color: #ccc;
+    transition: color 0.3s ease-in-out;
+    /* Thêm hiệu ứng màu khi thay đổi */
+}
+
+.rating label:hover,
+.rating input:checked~label {
+    color: orange;
+}
+
+.order-status {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #d57474;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    /* Make sure it's visible */
+    z-index: 999;
+}
+
+.status-item {
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.status-item i {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #343a40;
+    /* Màu sắc biểu tượng */
+}
+
+.status-item:hover {
+    background-color: #e2e6ea;
+    /* Màu sắc thay đổi khi hover */
+}
+
+.status-item h3 {
+    color: #007bff;
+    /* Màu sắc tiêu đề */
+}
+
+.status-item p {
+    color: #495057;
+    /* Màu sắc mô tả */
+}
+
+#myTabs1 {
+    background-color: #FF6F61;
+    /* Màu nền FF6F61 */
+    border-radius: 8px;
+    /* Bo tròn các góc */
+    padding: 10px;
+    /* Khoảng cách giữa tab và nội dung */
+}
+
+#myTabs1 a {
+    color: #333333;
+    /* Màu chữ mặc định */
+    font-weight: bold;
+    /* Đậm chữ */
+    padding: 10px 20px;
+    /* Khoảng cách giữa các tab */
+    margin-right: 5px;
+    /* Khoảng cách giữa các tab */
+    border-radius: 6px;
+    /* Bo tròn các góc */
+    text-decoration: none;
+    /* Loại bỏ gạch chân mặc định */
+}
+
+#myTabs1 a.active,
+#myTabs1 a:hover {
+    background-color: #FF5733;
+    /* Màu nền khi active hoặc hover */
+    color: #FFFFFF;
+    /* Màu chữ khi active hoặc hover */
+}
+
+.tab-content {
+    background-color: #F5F5F5;
+    /* Màu nền nội dung tab */
+    padding: 20px;
+    /* Khoảng cách giữa nội dung và khung */
+    border-radius: 8px;
+    /* Bo tròn các góc */
+    margin-top: 10px;
+    /* Khoảng cách giữa tab và nội dung */
+}
+
+#myTabs {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav-item-custom {
+    margin-right: 5px;
+    /* Khoảng cách giữa các tab */
+}
+
+#myTabs .inactive-tab {
+    padding: 10px;
+    background-color: #f8f9fa;
+    color: #000;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    border: 1px solid #FF6F61;
+    /* Hiệu ứng transition */
+}
+
+#myTabs .inactive-tab:hover {
+    background-color: #e9ecef;
+    /* Màu nền khi hover */
+    border-color: #adb5bd;
+
+    /* Viền khi hover */
+}
+
+#myTabs .selected-tab {
+    background-color: #FF6F61;
+    color: #fff;
+    border: 1px solid #FF6F61;
+    border-radius: 0.25rem;
+    text-decoration: none;
+}
+
+#myTabs .active-tab {
+    padding: 10px;
+    background-color: #FF6F61;
+    color: #fff;
+    border: 1px solid #FF6F61;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    /* Hiệu ứng transition */
+}
+
+#myTabs .active-tab:hover {
+    background-color: #e9523b;
+    /* Màu nền khi hover */
+    border-color: #e9523b;
+    /* Viền khi hover */
+}
+
 a {
     color: #FF6F61;
 }

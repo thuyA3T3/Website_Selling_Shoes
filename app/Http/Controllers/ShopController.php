@@ -30,9 +30,13 @@ class ShopController extends Controller
         Shop::create([
             'name' => (string) $request->input("name"),
             'customer_id' => (string) $customer->id,
+            'thumb' => (string) $request->input("thumb"),
         ]);
         $customer1 = Customer::find($customer->id);
-        $customer1->role = 'seller';
+        if ($customer1->role == 'customer') {
+            $customer1->role = 'wait';
+        }
+
         $customer1->save();
 
         return redirect()->route('viewaccount');
@@ -40,6 +44,32 @@ class ShopController extends Controller
     public function store(ProductRequest $request)
     {
         $this->productService->insert($request);
+        return redirect()->back();
+    }
+    public function destroy(Request $request)
+    {
+        $result = $this->productService->destroy1($request);
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xoa thanh cong shop'
+            ]);
+        }
+        return response()->json([
+            'error' => true
+
+        ]);
+    }
+    public function edit(Request $request)
+    {
+
+        $shopId = $request->input('id');
+        $shop = Shop::find($shopId);
+        $shop->update([
+            'name' => $request->input('name'),
+            'thumb' => $request->input('thumb'),
+
+        ]);
         return redirect()->back();
     }
 }

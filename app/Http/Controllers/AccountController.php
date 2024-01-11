@@ -32,25 +32,47 @@ class AccountController extends Controller
         $customer = Auth::guard('customer')->user();
         $shops = Shop::where('customer_id', $customer->id)->get();
         $orders = Oder::where('CustomerID', $customer->id)->get();
+        $orderShop = [];
         $orderdetails = [];
         foreach ($orders as $order) {
             $orderdetails = array_merge($orderdetails, $order->orderDetails->toArray());
         }
         $products = Product::all();
         $resultArray = [];
-
+        $totalRevenueShop = [];
         foreach ($shops as $shop) {
 
             $shop = Shop::with('products.orders')->find($shop->id);
-
-
+            $totalRevenue = 0;
+            $shopID = $shop->id;
 
             foreach ($shop->products as $product) {
-                $shopID = $shop->id;
+
                 $productName = $product->Name;
                 $orderCount = $product->orders->count();
                 $resultArray[] = compact('shopID', 'productName', 'orderCount');
+
+                foreach ($product->orders as $order) {
+                    $productId = $order->ProductID;
+
+                    // Lấy giá trị sản phẩm từ bảng Product
+                    $product = Product::find($productId);
+
+                    $totalRevenue += $product->Price * $order->Quantity;
+
+                    $foundOrder = Oder::find($order->OrderID);
+                    $orderID = $order->OrderID;
+                    $orderStatus = $foundOrder->status;
+                    $price = $product->Price;
+                    $quantity = $order->Quantity;
+
+
+                    $orderShop[] = compact('productName', 'shopID', 'orderID', 'price', 'quantity', 'orderStatus');
+                    // Tính tổng giá trị đơn hàng
+
+                }
             }
+            $totalRevenueShop[] = compact('shopID', 'totalRevenue');
         }
         $sortedResultArray = collect($resultArray)->sortByDesc('orderCount')->values()->all();
 
@@ -60,7 +82,10 @@ class AccountController extends Controller
             'products' => $products,
             'menus'  => $this->productService->getMenu(),
             'shops' => $shops,
+            'orders' => $orders,
             'resultArray' => $sortedResultArray,
+            'totalRevenue' => $totalRevenueShop,
+            'orderShop' => $orderShop,
         ]);
     }
 
@@ -150,5 +175,38 @@ class AccountController extends Controller
     {
         Session::flash('error', 'Ai đó đang cố truy cập tài khoản của bạn');
         return redirect()->route('viewloginregister');
+    }
+    public function updateUser(Request $request)
+    {
+        $userId = Auth::guard('customer')->id();
+        $user = Customer::find($userId);
+
+        if ($user) {
+            $user->FirstName = $request->input('firstName');
+            $user->LastName = $request->input('lastName');
+            $user->address = $request->input('address');
+            $user->Phone = $request->input('phone');
+            $user->save();
+
+            return redirect()->back();
+        } else {
+            // Xử lý trường hợp không tìm thấy người dùng
+            return redirect()->back()->with('error', 'Người dùng không tồn tại');
+        }
+    }
+    public function updatePassword(Request $request)
+    {
+        $userId = Auth::guard('customer')->id();
+        $user = Customer::find($userId);
+        $this->validate($request, [
+            'oldPassword' => 'required|password',
+            'newPassword' => 'required',
+            'confirmPassword' => 'required|same:newPassword',
+        ], [
+            'oldPassword.password' => 'The current password is incorrect.',
+            'confirmPassword.same' => 'The new password and confirm password must match.',
+        ]);
+        $user->update(['password' => Hash::make($request->input('newPassword'))]);
+        return redirect()->route('viewloginregister')->with('error', 'Bạn cần đăng nhập lại sau khi đổi mật khẩu');
     }
 }

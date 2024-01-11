@@ -26,16 +26,22 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('customer')->attempt($credentials)) {
+            $user = Auth::guard('customer')->user();
 
-            return redirect()->route('home');
+            // Kiểm tra trường activation
+            if ($user->activation) {
+                return redirect()->route('home');
+            } else {
+                Auth::guard('customer')->logout();
+                return back()->withErrors(['email' => 'Tài khoản chưa được kích hoạt']);
+            }
         } else {
-
             return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng']);
         }
     }
     public function signOut()
     {
         Auth::guard('customer')->logout();
-        return redirect()->route('home');
+        return redirect()->route('viewloginregister');
     }
 }

@@ -35,7 +35,7 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
                         <a href="/" class="nav-item nav-link active">Home</a>
-                        <a href="{{route('product')}}" class="nav-item nav-link">Products</a>
+                        <a href="{{route('productShortby')}}" class="nav-item nav-link">Products</a>
                         <a href="{{route('viewcart')}}" class="nav-item nav-link">Cart</a>
                         <a href="{{route('viewaccount')}}" class="nav-item nav-link">My Account</a>
                     </div>

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('shops', function (Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             //
-            $table->string('thumb')->nullable();
+            $table->string('status')->default('pending');
         });
     }
 
@@ -22,9 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('shops', function (Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             //
-            $table->dropColumn('thumb');
+            $table->dropColumn('status');
         });
     }
 };

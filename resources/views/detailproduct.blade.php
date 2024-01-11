@@ -75,7 +75,7 @@
             </div>
             <div class="shop-info row">
                 <div class="col-lg-1">
-                    <img src="{{$shop->thumb}}" alt="{{ $shop->name }} Image" width="100px" height="100px" class="rounded-circle border border-danger">
+                    <img src="{{$shop->thumb ? $shop->thumb : '/img/1.webp'}}" alt="{{ $shop->name }} Image" width="100px" height="100px" class="rounded-circle border border-danger">
                 </div>
                 <div class="col-lg-11">
                     <h2>{{$shop->name}}</h2>
@@ -92,7 +92,12 @@
                             <a class="nav-link" data-toggle="pill" href="#specification">Specification</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="pill" href="#reviews">Reviews (1)</a>
+                            @php
+                            $countReview = $reviews->count();
+                            @endphp
+                            <a class="nav-link" id="reviews-tab" data-toggle="pill" href="#reviews">
+                                Reviews <span class="badge badge-primary">{{ $countReview }}</span>
+                            </a>
                         </li>
                     </ul>
 
@@ -114,43 +119,56 @@
                             </ul>
                         </div>
                         <div id="reviews" class="container tab-pane fade">
+                            <h3 class="mb-5">{{$averageRating}} <i class="fa fa-star text-warning"></i></h3>
+                            @foreach($reviews as $index => $review)
                             <div class="reviews-submitted">
-                                <div class="reviewer">Phasellus Gravida - <span>01 Jan 2020</span></div>
+                                <div class="reviewer">{{$review->customer->LastName}} - <span>{{$review->updated_at}}</span></div>
                                 <div class="ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                    <div class="rating">
+                                        @for ($i = 1; $i <= 5; $i++) @if ($i <=$review->rating)
+                                            <span class="star checked">&#9733;</span>
+                                            @else
+                                            <span class="star">&#9734;</span>
+                                            @endif
+                                            @endfor
+                                    </div>
                                 </div>
                                 <p>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+                                    {{$review->comment}}
                                 </p>
                             </div>
+                            @endforeach
+
+
+                            @if(auth('customer')->check())
                             <div class="reviews-submit">
-                                <h4>Give your Review:</h4>
-                                <div class="ratting">
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div class="row form">
-                                    <div class="col-sm-6">
-                                        <input type="text" placeholder="Name">
+                                <form action="{{route('review')}}" method="POST">
+                                    @csrf
+                                    <!-- Các trường khác của form -->
+
+                                    <div class="row form">
+                                        <h4>Give your Review:</h4>
+                                        <div class="rating mt-5" id="rating">
+                                            @for ($i = 1; $i
+                                            <= 5; $i++) <input type="radio" id="star{{ $i }}" name="rating" value="{{ $i }}" />
+                                            <label for="star{{ $i }}" title="{{ $i }} sao">&#9733;</label>
+                                            @endfor
+                                        </div>
+                                        <input hidden name="customerReview" value="{{auth('customer')->user()->id}}">
+                                        <input hidden name="productReview" value="{{$product->id}}">
+                                        <input hidden name="starReview" id="starReview" value="">
+
+                                        <div class="col-sm-12">
+                                            <textarea name="comment" placeholder="Review"></textarea>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="email" placeholder="Email">
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <textarea placeholder="Review"></textarea>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <button>Submit</button>
-                                    </div>
-                                </div>
+
+                                    <!-- Các trường khác của form -->
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>

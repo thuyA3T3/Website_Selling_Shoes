@@ -38,4 +38,8 @@ class Category extends Model
      * @var bool
      */
     public $timestamps = true;
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'CategoryID');
+    }
 }

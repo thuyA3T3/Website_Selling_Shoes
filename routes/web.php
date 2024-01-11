@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Admin\Customer\Customer\CustomerController;
 use App\Http\Controllers\Admin\Menu\CategorieController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\User\LoginController as AdminLogincontroller;
@@ -13,6 +14,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ShopController;
+use App\Models\Customer;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +28,8 @@ use App\Http\Controllers\ShopController;
 */
 
 Route::get('/', [MainController::class, 'index'])->name('home');
-Route::get('/product', [ProductController::class, 'index'])->name('product');
-Route::get('/category/{category}', [ProductController::class, 'showcategory']);
+Route::get('/product', [ProductController::class, 'showcategory'])->name('product');
+Route::get('/category/{category?}', [ProductController::class, 'showcategory'])->name('productShortby');
 
 Route::get('/product/{product}', [ProductController::class, 'show']);
 Route::post('/search', [ProductController::class, 'searchProducts']);
@@ -62,6 +64,10 @@ Route::middleware(['customer'])->group(function () {
     Route::get('/accept-order/{oder}/{token}', [CheckoutController::class, 'accept'])->name('accept');
     Route::get('/refuse-order/{oder}/{token}', [CheckoutController::class, 'refuse'])->name('refuse');
     Route::post('/upgrade', [ShopController::class, 'addShop'])->name('addShop');
+    Route::post('upload/services', [UploadController::class, 'store']);
+    Route::post('/review', [ProductController::class, 'review'])->name('review');
+    Route::post('/updateUser', [AccountController::class, 'updateUser'])->name('updateUser');
+    Route::post('/updatePassword', [AccountController::class, 'updatePassword'])->name('updatePassword');
 });
 
 Route::group(['middleware' => 'check.seller.role'], function () {
@@ -70,7 +76,10 @@ Route::group(['middleware' => 'check.seller.role'], function () {
     Route::get('/edit/{product}', [AdminProdcuctController::class, 'show']);
     Route::post('/edit/{product}', [AdminProdcuctController::class, 'update'])->name('updateproduct');
     Route::DELETE('/destroy', [AdminProdcuctController::class, 'destroy']);
+    Route::DELETE('/shop/destroy', [ShopController::class, 'destroy']);
+    Route::post('/shop/edit', [ShopController::class, 'edit'])->name('editShop');
 });
+Route::post('/pending', [CheckoutController::class, 'pending'])->name('pending');
 
 
 
@@ -93,6 +102,11 @@ Route::middleware(['auth'])->group(function () {
             Route::post('add', [AdminProdcuctController::class, 'store'])->name('addproduct');
             Route::get('list', [AdminProdcuctController::class, 'index'])->name('viewproduct');
         });
-        Route::post('upload/services', [UploadController::class, 'store']);
+        Route::prefix('customer')->group(function () {
+            Route::get('list', [CustomerController::class, 'index'])->name('viewcustomer');
+            Route::post('lock/{customer}', [CustomerController::class, 'lock']);
+            Route::get('listconfirm', [CustomerController::class, 'listconfirm']);
+            Route::get('confirm/{customer}', [CustomerController::class, 'confirm']);
+        });
     });
 });

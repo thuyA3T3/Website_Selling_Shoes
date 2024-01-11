@@ -60,4 +60,12 @@ class CheckoutController extends Controller
         $oder->delete();
         return redirect()->route('viewaccount');
     }
+    public function pending(Request $request)
+    {
+        $id = $request->input('id');
+        $select = $request->input('select');
+        $order = Oder::find($id);
+        $order->status = $select;
+        $order->save();
+    }
 }

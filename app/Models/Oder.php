@@ -26,6 +26,7 @@ class Oder extends Model
         'CustomerID',
         'OrderDate',
         'TotalAmount',
+        'status',
     ];
     public function orderDetails()
     {

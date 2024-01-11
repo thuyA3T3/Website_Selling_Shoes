@@ -19,6 +19,37 @@
             }
         });
     });
+    document.addEventListener('DOMContentLoaded', function () {
+        var editShopBtns = document.querySelectorAll('.editShopBtn');
+
+        editShopBtns.forEach(function (editShopBtn) {
+            editShopBtn.addEventListener('click', function (event) {
+                event.stopPropagation(); // Ngừng sự kiện click được truyền lên để tránh ẩn form ngay lập tức
+
+                var targetId = editShopBtn.getAttribute('data-target');
+                var editShopForm = document.getElementById('editShop' + targetId);
+
+                // Thêm hoặc loại bỏ lớp d-none để hiển thị hoặc ẩn biểu mẫu
+                editShopForm.classList.toggle('d-none');
+            });
+        });
+
+        // Xử lý sự kiện click bên ngoài biểu mẫu để ẩn nó
+        document.addEventListener('click', function (event) {
+            editShopBtns.forEach(function (editShopBtn) {
+                var targetId = editShopBtn.getAttribute('data-target');
+                var editShopForm = document.getElementById('editShop' + targetId);
+
+                // Kiểm tra xem sự kiện click có xảy ra bên ngoài biểu mẫu không
+                var isClickInside = editShopForm.contains(event.target) || editShopBtn.contains(event.target);
+
+                // Nếu không phải click bên trong, ẩn biểu mẫu
+                if (!isClickInside) {
+                    editShopForm.classList.add('d-none');
+                }
+            });
+        });
+    });
 
     document.addEventListener('DOMContentLoaded', function () {
         var editBtn = document.querySelector('.edit-btn');

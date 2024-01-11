@@ -70,18 +70,37 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('viewaddproduct')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm sản phẩm</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="/admin/product/list" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách sản phẩm</p>
                                     </a>
                                 </li>
 
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>
+                                    Khách hàng
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/admin/customer/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Danh sách</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/admin/customer/listconfirm" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Xác nhận người bán</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

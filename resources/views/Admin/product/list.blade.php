@@ -26,12 +26,7 @@
             <td>{{$product->updated_at }} </td>
 
             <td>
-
-                <a class="btn btn-primary btn-sm" href="/admin/product/edit/{{$product->id}}">
-                    <i class="fas fa-edit"></i>
-                </a>
-
-                <a href="#" class="btn btn-danger btn-sm" onclick="removeRow('{{ $product->id }}',' /admin/product/destroy ')">
+                <a href="#" class="btn btn-danger btn-sm" onclick="removeRow('{{ $product->id }}','/destroy ')">
                     <i class="fas fa-edit"></i>
                 </a>
             </td>

@@ -36,7 +36,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="product-search">
-                                        <input type="email" value="Search">
+                                        <input type="email" placeholder="Search">
                                         <button><i class="fa fa-search"></i></button>
                                     </div>
                                 </div>
@@ -45,9 +45,16 @@
                                         <div class="dropdown">
                                             <div class="dropdown-toggle" data-toggle="dropdown">Product short by</div>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="#" class="dropdown-item">Newest</a>
-                                                <a href="#" class="dropdown-item">Popular</a>
-                                                <a href="#" class="dropdown-item">Most sale</a>
+                                                <a href="{{ route('productShortby', [
+                                                    'category' => $category ? $category->id : null,
+                                                    'sort_by' => 'updated_at',
+                                                    'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc'
+                                                ]) }}" class="dropdown-item">Newest</a>
+                                                <a href="{{ route('productShortby', [
+                                                    'category' => $category ? $category->id : null,
+                                                    'sort_by' => 'Price',
+                                                    'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc'
+                                                ]) }}" class="dropdown-item">Price</a>
                                             </div>
                                         </div>
                                     </div>
@@ -57,16 +64,53 @@
                                         <div class="dropdown">
                                             <div class="dropdown-toggle" data-toggle="dropdown">Product price range</div>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="#" class="dropdown-item">$0 to $50</a>
-                                                <a href="#" class="dropdown-item">$51 to $100</a>
-                                                <a href="#" class="dropdown-item">$101 to $150</a>
-                                                <a href="#" class="dropdown-item">$151 to $200</a>
-                                                <a href="#" class="dropdown-item">$201 to $250</a>
-                                                <a href="#" class="dropdown-item">$251 to $300</a>
-                                                <a href="#" class="dropdown-item">$301 to $350</a>
-                                                <a href="#" class="dropdown-item">$351 to $400</a>
-                                                <a href="#" class="dropdown-item">$401 to $450</a>
-                                                <a href="#" class="dropdown-item">$451 to $500</a>
+                                                <a href="{{ route('productShortby', [
+                                                    'category' => $category ? $category->id : null,
+                                                    'sort_by' => 'Price',
+                                                    'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc',
+                                                    'max_price' => 20,
+
+                                                ]) }}" class="dropdown-item">$0 to $20</a>
+                                                <a href="{{ route('productShortby', [
+                                                    'category' => $category ? $category->id : null,
+                                                    'sort_by' => 'Price',
+                                                    'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc',
+                                                    'min_price' => 20,
+                                                    'max_price' => 50,
+                                                    
+                                                ]) }}" class="dropdown-item">$20 to $50</a>
+                                                <a href="{{ route('productShortby', [
+                                                    'category' => $category ? $category->id : null,
+                                                    'sort_by' => 'Price',
+                                                    'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc',
+                                                    'min_price' => 50,
+                                                    'max_price' => 100,
+                                                    
+                                                ]) }}" class="dropdown-item">$50 to $100</a>
+                                                <a href="{{ route('productShortby', [
+                                                    'category' => $category ? $category->id : null,
+                                                    'sort_by' => 'Price',
+                                                    'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc',
+                                                    'min_price' => 100,
+                                                    'max_price' => 200,
+                                                    
+                                                ]) }}" class="dropdown-item">$100 to $200</a>
+                                                <a href="{{ route('productShortby', [
+                                                    'category' => $category ? $category->id : null,
+                                                    'sort_by' => 'Price',
+                                                    'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc',
+                                                    'min_price' => 200,
+                                                    'max_price' => 300,
+                                                    
+                                                ]) }}" class="dropdown-item">$200 to $300</a>
+                                                <a href="{{ route('productShortby', [
+                                                    'category' => $category ? $category->id : null,
+                                                    'sort_by' => 'Price',
+                                                    'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc',
+                                                    'min_price' => 300,
+                                                
+                                                    
+                                                ]) }}" class="dropdown-item">more than 300$</a>
                                             </div>
                                         </div>
                                     </div>

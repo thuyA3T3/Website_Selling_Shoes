@@ -38,7 +38,10 @@ class Customer extends Authenticatable
         'role',
         'addres',
     ];
-
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'customer_id');
+    }
     /**
      * Indicates if the model should be timestamped.
      *
